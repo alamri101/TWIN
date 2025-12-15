@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Queen Elaf 👑</title>
+    <style>
+        body {
+            /* Cute Background */
+            background: radial-gradient(circle, #fff0f5 10%, #ffcce6 90%);
+            height: 100vh;
+            margin: 0;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+            font-family: 'Courier New', cursive;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="font-size:20px"><text y="18">💋</text></svg>'), auto;
+        }
+
+        /* ===== NEW: QUEEN ELAF GLITTER TITLE ===== */
+        .main-title {
+            position: absolute;
+            top: 40px; /* Position from top */
+            width: 100%;
+            text-align: center;
+            font-size: 70px; /* Big Size */
+            font-weight: 900; /* Extra Bold */
+            font-family: 'Arial Black', 'Arial Bold', sans-serif; /* Strong Font */
+            text-transform: uppercase;
+            z-index: 500;
+            letter-spacing: 2px;
+
+            /* The Glitter Effect Magic */
+            background-image: linear-gradient(
+                to right,
+                #ff1493, #ffd700, #ff69b4, #c0c0c0, #ff1493
+            ); /* Pink, Gold, Silver gradient */
+            background-size: 200% auto;
+            
+            /* Clip background to text letters */
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            
+            /* Animate the glitter shiny effect */
+            animation: shine 3s linear infinite;
+
+            /* Add a soft glow drop shadow */
+            filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5));
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+
+        .scene {
+            perspective: 1200px; /* Better depth */
+            margin-top: 120px; /* Moved down a bit to make room for the title */
+            position: relative;
+        }
+
+        /* --- INSTRUCTIONS --- */
+        .instruction {
+            position: absolute; top: -100px; width: 100%; text-align: center;
+            color: #ff1493; font-size: 22px; font-weight: bold;
+            text-shadow: 2px 2px 0px white;
+            animation: floatText 2s infinite ease-in-out; pointer-events: none; z-index: 90;
+        }
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); }
+        }
+
+        /* --- KISS MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-box {
+            background: white; padding: 40px; border-radius: 30px;
+            border: 5px solid #ff1493; text-align: center;
+            box-shadow: 0 10px 40px rgba(255, 20, 147, 0.5);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-box p { color: #ff1493; font-size: 24px; font-weight: bold; margin-top: 0; }
+        .modal-box button {
+            background: linear-gradient(to right, #ff1493, #ff69b4); color: white;
+            border: none; padding: 15px 40px; font-size: 22px; border-radius: 50px;
+            cursor: pointer; font-family: inherit; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3); transition: transform 0.2s;
+        }
+        .modal-box button:hover { transform: scale(1.1); }
+
+        /* ===== HELLO KITTY DECORATION ===== */
+        .kitty-decor {
+            position: absolute;
+            bottom: -20px;
+            left: -180px;
+            width: 150px;
+            z-index: 50;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+            animation: gentleRock 3s infinite ease-in-out;
+        }
+        @keyframes gentleRock {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* ===== 3D BOX CONTAINER ===== */
+        .cube {
+            position: relative; width: 200px; height: 200px;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(45deg);
+            transition: transform 0.5s; cursor: pointer;
+        }
+        .cube:not(.open):hover { transform: rotateX(-20deg) rotateY(45deg) scale(1.05); }
+
+        /* --- SIDES OF THE BOX --- */
+        .face {
+            position: absolute; width: 200px; height: 200px;
+            background: #ff69b4; /* Pink */
+            border: 3px solid #ff1493; /* Darker Outline */
+            box-sizing: border-box; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1); 
+        }
+
+        /* Ribbon Stripes */
+        .face::before { content: ''; position: absolute; width: 40px; height: 100%; background: white; left: 50%; transform: translateX(-50%); border-left: 1px solid #ffb6c1; border-right: 1px solid #ffb6c1; }
+        .face::after { content: ''; position: absolute; height: 40px; width: 100%; background: white; top: 50%; transform: translateY(-50%); border-top: 1px solid #ffb6c1; border-bottom: 1px solid #ffb6c1; }
+
+        /* POSITIONS */
+        .front  { transform: translateZ(100px); }
+        .back   { transform: rotateY(180deg) translateZ(100px); }
+        .right  { transform: rotateY(90deg) translateZ(100px); }
+        .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); background: #d147a3; }
+        
+        /* Inner Colors */
+        .back-inner { transform: rotateY(180deg) translateZ(99px); background: #e05297; border:none; box-shadow:none; }
+        .right-inner { transform: rotateY(90deg) translateZ(99px); background: #e05297; border:none; box-shadow:none; }
+        .left-inner { transform: rotateY(-90deg) translateZ(99px); background: #e05297; border:none; box-shadow:none; }
+        .bottom-inner { transform: rotateX(-90deg) translateZ(99px); background: #e05297; border:none; box-shadow:none; }
+        .back-inner::before, .back-inner::after, .right-inner::before, .right-inner::after, .left-inner::before, .left-inner::after, .bottom-inner::before, .bottom-inner::after { content: none; }
+
+        /* --- THE LID --- */
+        .lid-container {
+            position: absolute; width: 200px; height: 200px;
+            transform: rotateX(90deg) translateZ(100px);
+            transform-style: preserve-3d;
+            transform-origin: top; 
+            transition: transform 1s cubic-bezier(0.4, 1.5, 0.4, 1.0);
+        }
+
+        .lid {
+            width: 100%; height: 100%;
+            background: #ff69b4; border: 3px solid #ff1493;
+            box-sizing: border-box; position: absolute;
+            backface-visibility: hidden;
+        }
+        .lid::before { content: ''; position: absolute; width: 40px; height: 100%; background: white; left: 50%; transform: translateX(-50%); border-left: 1px solid #ffb6c1; border-right: 1px solid #ffb6c1; }
+        .lid::after { content: ''; position: absolute; height: 40px; width: 100%; background: white; top: 50%; transform: translateY(-50%); border-top: 1px solid #ffb6c1; border-bottom: 1px solid #ffb6c1; }
+
+        .bow {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px; z-index: 200;
+            text-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- ANIMATION: OPENING --- */
+        .cube.open .lid-container {
+            transform: rotateX(210deg) translateZ(100px);
+        }
+
+        /* --- GIFT CONTENTS --- */
+        .gift-container {
+            position: absolute; width: 180px; height: 180px;
+            top: 10px; left: 10px;
+            transform-style: preserve-3d;
+            transform: rotateY(-45deg); 
+            transition: transform 1.5s ease-in-out 0.5s, opacity 0.5s 0.5s;
+            opacity: 0; pointer-events: none; z-index: 50;
+        }
+
+        .cube.open .gift-container {
+            transform: translateY(-160px) rotateY(-45deg); 
+            opacity: 1; z-index: 200;
+        }
+
+        .gift-img {
+            width: 100%; border-radius: 15px; border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: white;
+        }
+
+        /* MESSAGE BUBBLE */
+        .message {
+            position: absolute; 
+            top: -90px; left: 50%; transform: translateX(-50%) scale(0);
+            background: white; padding: 15px; border-radius: 20px;
+            border: 3px solid #ff1493; color: #ff1493;
+            width: 200px; text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.2);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.5s;
+        }
+        .cube.open .message { transform: translateX(-50%) scale(1); }
+        
+        .message::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            border-width: 10px 10px 0; border-style: solid; border-color: #ff1493 transparent transparent transparent;
+        }
+
+        /* --- CONFETTI --- */
+        .confetti {
+            position: absolute; width: 10px; height: 10px; background-color: #f00;
+            animation: fall linear forwards; z-index: 500;
+        }
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.8); } to { transform: scale(1); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-title">Queen Elaf</div>
+
+    <div id="kissModal" class="modal-overlay">
+        <div class="modal-box">
+            <p>Wait! Give me a kiss first twin 💋</p>
+            <button onclick="actuallyOpenTheBox()">Mwah! 💋</button>
+        </div>
+    </div>
+
+    <div class="scene">
+        <div class="instruction" id="instruct">I have a surprise...</div>
+
+        <img src="kitty_elaf.png" class="kitty-decor" alt="Hello Kitty with Drink">
+        
+        <div class="cube" onclick="showKissModal()">
+            
+            <div class="gift-container">
+                <div class="message">
+                    <h3 style="margin: 0; font-size: 22px;">Yay!</h3>
+                    <p style="margin: 5px 0 0 0;">I really like you! 💖</p>
+                </div>
+                <img src="source.gif" class="gift-img" alt="Surprise">
+            </div>
+
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face right"></div>
+            <div class="face left"></div>
+            <div class="face bottom"></div>
+            
+            <div class="face back-inner"></div>
+            <div class="face right-inner"></div>
+            <div class="face left-inner"></div>
+            <div class="face bottom-inner"></div>
+
+            <div class="lid-container">
+                <div class="lid">
+                    <div class="bow">🎀</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let isOpen = false;
+
+        function showKissModal() {
+            if (isOpen) return;
+            document.getElementById('kissModal').style.display = 'flex';
+        }
+
+        function actuallyOpenTheBox() {
+            document.getElementById('kissModal').style.display = 'none';
+            
+            isOpen = true;
+            const cube = document.querySelector('.cube');
+            const instruction = document.getElementById('instruct');
+
+            // Trigger Animation
+            cube.classList.add('open');
+            instruction.style.display = 'none';
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#ff69b4', '#ff1493', '#ffffff', '#ffd700'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => { confetti.remove(); }, 5000);
+            }
+        }
+    </script>
+
+</body>
+</html>
